@@ -4,4 +4,3 @@ dist/
 build/
 client/build/
 .vscode/
-.env

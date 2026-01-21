@@ -18,7 +18,7 @@ const Contact = () => {
   e.preventDefault();
 
   try {
-    const res = await fetch("http://localhost:4000/api/contact", {
+    const res = await fetch("https://my-portfolio-n1q0.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
