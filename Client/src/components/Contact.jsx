@@ -6,6 +6,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -16,28 +17,41 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
-      const backendURL =
-        import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+      const backendURL = import.meta.env.VITE_BACKEND_URL;
+      
+      if (!backendURL) {
+        throw new Error("Backend URL is not configured");
+      }
 
+      console.log("Sending request to:", `${backendURL}/api/contact`);
+      
       const res = await fetch(`${backendURL}/api/contact`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify(formData),
       });
 
+      const data = await res.json();
+      console.log("Response:", data);
+
       if (!res.ok) {
-        throw new Error("Response not OK");
+        throw new Error(data.error || `HTTP error! status: ${res.status}`);
       }
 
-
-      alert("Message sent successfully ✅");
+      alert("Message sent successfully! ✅");
       setFormData({ name: "", email: "", message: "" });
 
     } catch (err) {
-      console.error("FRONTEND ERROR 👉", err);
-      alert("Failed to send message ❌");
+      console.error("FRONTEND ERROR:", err);
+      alert(`Failed to send message: ${err.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -53,6 +67,7 @@ const Contact = () => {
           required
           value={formData.name}
           onChange={handleChange}
+          disabled={isLoading}
         />
 
         <input
@@ -62,6 +77,7 @@ const Contact = () => {
           required
           value={formData.email}
           onChange={handleChange}
+          disabled={isLoading}
         />
 
         <textarea
@@ -70,10 +86,15 @@ const Contact = () => {
           required
           value={formData.message}
           onChange={handleChange}
+          disabled={isLoading}
         ></textarea>
 
-        <button type="submit" className="btn-primary mx-auto">
-          Send Message
+        <button 
+          type="submit" 
+          className="btn-primary mx-auto"
+          disabled={isLoading}
+        >
+          {isLoading ? "Sending..." : "Send Message"}
         </button>
       </form>
     </section>
