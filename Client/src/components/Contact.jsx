@@ -77,17 +77,8 @@ const Contact = () => {
 
   return (
     <section className="contact" id="contact">
-      {/* Add Toaster component */}
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          duration: 5000,
-          style: {
-            fontSize: '16px',
-            maxWidth: '400px',
-          },
-        }}
-      />
+
+    
 
       <h2>Contact Me</h2>
 
