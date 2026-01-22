@@ -6,7 +6,6 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,17 +16,14 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    try {/* global process */
-      // Use environment variable for backend URL
-      const backendURL =process.env.REACT_APP_BACKEND_URL || "http://localhost:4000";
+    try {
+      const backendURL =
+        import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
 
       const res = await fetch(`${backendURL}/api/contact`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -35,13 +31,13 @@ const Contact = () => {
         throw new Error("Response not OK");
       }
 
+
       alert("Message sent successfully ✅");
       setFormData({ name: "", email: "", message: "" });
+
     } catch (err) {
       console.error("FRONTEND ERROR 👉", err);
       alert("Failed to send message ❌");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -76,12 +72,8 @@ const Contact = () => {
           onChange={handleChange}
         ></textarea>
 
-        <button
-          type="submit"
-          className="btn-primary mx-auto"
-          disabled={loading}
-        >
-          {loading ? "Sending..." : "Send Message"}
+        <button type="submit" className="btn-primary mx-auto">
+          Send Message
         </button>
       </form>
     </section>
