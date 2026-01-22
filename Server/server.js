@@ -8,12 +8,16 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://my-portfolio-nine-omega-29.vercel.app/",
-    methods: ["GET", "POST"],
-    credentials: true,
+    origin: [
+      "https://my-portfolio-nine-omega-29.vercel.app/",
+    ],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
-app.use(express.json()); 
+
+app.use(express.json());
+app.options("*", cors());
 
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
