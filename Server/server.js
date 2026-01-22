@@ -6,7 +6,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://my-portfolio-nine-omega-29.vercel.app/",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json()); 
 
 app.post("/api/contact", async (req, res) => {

@@ -6,6 +6,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -15,30 +16,34 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const res = await fetch("https://my-portfolio-n1q0.onrender.com/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {/* global process */
+      // Use environment variable for backend URL
+      const backendURL =process.env.REACT_APP_BACKEND_URL || "http://localhost:4000";
 
-    if (!res.ok) {
-      throw new Error("Response not OK");
+      const res = await fetch(`${backendURL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Response not OK");
+      }
+
+      alert("Message sent successfully ✅");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("FRONTEND ERROR 👉", err);
+      alert("Failed to send message ❌");
+    } finally {
+      setLoading(false);
     }
-
-  
-    alert("Message sent successfully ✅");
-    setFormData({ name: "", email: "", message: "" });
-
-  } catch (err) {
-    console.error("FRONTEND ERROR 👉", err);
-    alert("Failed to send message ❌");
-  }
-};
+  };
 
   return (
     <section className="contact" id="contact">
@@ -71,8 +76,12 @@ const Contact = () => {
           onChange={handleChange}
         ></textarea>
 
-        <button type="submit" className="btn-primary mx-auto">
-          Send Message
+        <button
+          type="submit"
+          className="btn-primary mx-auto"
+          disabled={loading}
+        >
+          {loading ? "Sending..." : "Send Message"}
         </button>
       </form>
     </section>
