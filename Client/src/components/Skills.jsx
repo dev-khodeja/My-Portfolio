@@ -10,8 +10,11 @@ const Skills = () => (
       <li className="skill-node" style={{background: 'linear-gradient(90deg, #3C873A, #0a0e1a)'}}>Node.js</li>
       <li className="skill-js" style={{background: 'linear-gradient(90deg, #f7df1e, #f7b731)'}}>JavaScript (ES6+)</li>
       <li className="skill-html" style={{background: 'linear-gradient(90deg, #e44d26, #f16529)'}}>HTML5 & CSS3</li>
+      <li className="skill-html" style={{background: 'linear-gradient(90deg, #e44d25, #000)'}}>SCSS</li>
       <li className="skill-rest" style={{background: 'linear-gradient(90deg, #00c6ff, #0072ff)'}}>REST APIs</li>
       <li className="skill-git" style={{background: 'linear-gradient(90deg, #f34f29, #24292e)'}}>Git & GitHub</li>
+      <li className="skill-git" style={{background: 'linear-gradient(90deg, #f349, #242e)'}}>Firebase</li>
+    
     </ul>
   </section>
 );
