@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
 			<div id="skills" className="fade-in-section delay-3"><Skills /></div>
 			<div id="projects" className="fade-in-section delay-4"><Projects /></div>
 			<div id="contact" className="fade-in-section delay-5"><Contact /></div>
-
+        <Footer/>
 			
 		</div>
     </>

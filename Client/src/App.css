@@ -185,6 +185,7 @@ body, html {
 	color: #fff;
 	letter-spacing: 2px;
 	text-shadow: 0 2px 12px #23539099;
+	font-weight: bold;
 }
 .hero-content h2 {
 	font-size: 2rem;
@@ -223,7 +224,10 @@ section {
 }
 
 h2 {
-	color: #4f8cff;
+	color: white;
+	font-size: 2rem;
+	text-align: center;
+	font-weight:bold;
 	margin-bottom: 1rem;
 	letter-spacing: 1px;
 }

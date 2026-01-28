@@ -54,6 +54,7 @@ const Hero = () => {
         <p>I build scalable web applications using MongoDB, Express, React, and Node.js.</p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#contact" className="btn-primary">Contact Me</a>
+          <a href="https://github.com/dev-khodeja" className="btn-primary">Github</a>
           <button 
             onClick={handleDownload}
             className="btn-primary"
